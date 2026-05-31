@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const heroVideo = "/videos-featured/Day%203%20%20Event%20Highlight.mp4";
+const heroVideo = "/videos-featured/day-3-event-highlight.mp4";
 
 export default function HeroVideo() {
   const rootRef = useRef<HTMLElement>(null);
@@ -45,15 +45,18 @@ export default function HeroVideo() {
     <section ref={rootRef} className="relative flex min-h-screen items-end overflow-hidden px-5 pb-10 sm:px-8 lg:px-12 lg:pb-14">
       <div data-hero-video className="absolute inset-0 video-fallback">
         <video
-          className="h-full w-full object-cover opacity-90"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/video-thumbnails/Day%203%20%20Event%20Highlight.jpg"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+  className="h-full w-full object-cover opacity-90"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+  poster="/video-thumbnails/Day%203%20%20Event%20Highlight.jpg"
+  onError={(e) => console.log("VIDEO ERROR", e)}
+  onLoadedData={() => console.log("VIDEO LOADED")}
+>
+  <source src={heroVideo} type="video/mp4" />
+</video>
       </div>
 
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0.2)_0%,rgba(5,5,5,0.18)_38%,rgba(5,5,5,0.96)_100%)]" />
