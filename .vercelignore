@@ -1,0 +1,4 @@
+public/Videos/**
+.next/**
+node_modules/**
+dev-server*.log
