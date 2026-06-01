@@ -6,8 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const heroVideo = "/videos-featured/Day%203%20%20Event%20Highlight.mp4";
-const heroPoster = "/video-thumbnails/day-3-event-highlight.jpg.jpg";
+const heroVideo = "/videos-featured/hero-day-3-event-highlight.mp4";
+const heroPoster = "/video-thumbnails/hero-day-3-event-highlight.jpg";
 
 export default function HeroVideo() {
   const rootRef = useRef<HTMLElement>(null);
@@ -18,6 +18,7 @@ export default function HeroVideo() {
 
     if (video) {
       video.muted = true;
+      video.load();
       void video.play().catch(() => {
         // Browsers can delay autoplay until enough media has buffered.
       });
@@ -65,6 +66,7 @@ export default function HeroVideo() {
           preload="auto"
           poster={heroPoster}
           onCanPlay={(event) => void event.currentTarget.play().catch(() => undefined)}
+          onLoadedData={(event) => void event.currentTarget.play().catch(() => undefined)}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
