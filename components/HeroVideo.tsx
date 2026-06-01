@@ -6,12 +6,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const heroVideo = "/videos-featured/day-3-event-highlight.mp4";
+const heroVideo = "/videos-optimized/day-3-event-highlight.mp4.mp4";
+const heroPoster = "/video-thumbnails/day-3-event-highlight.jpg.jpg";
 
 export default function HeroVideo() {
   const rootRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    const video = videoRef.current;
+
+    if (video) {
+      video.muted = true;
+      void video.play().catch(() => {
+        // Browsers can delay autoplay until enough media has buffered.
+      });
+    }
+
     const ctx = gsap.context(() => {
       const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
 
@@ -45,26 +56,18 @@ export default function HeroVideo() {
     <section ref={rootRef} className="relative flex min-h-screen items-end overflow-hidden px-5 pb-10 sm:px-8 lg:px-12 lg:pb-14">
       <div data-hero-video className="absolute inset-0 video-fallback">
         <video
-  className="h-full w-full object-cover opacity-90"
-  autoPlay
-  muted
-  loop
-  playsInline
-  preload="auto"
-  poster="/video-thumbnails/Day%203%20%20Event%20Highlight.jpg"
-  onCanPlay={(e) => {
-    console.log("VIDEO CAN PLAY");
-    e.currentTarget.play().catch(console.error);
-  }}
-  onLoadedData={() => {
-    console.log("VIDEO LOADED");
-  }}
-  onError={(e) => {
-    console.log("VIDEO ERROR", e);
-  }}
->
-  <source src={heroVideo} type="video/mp4" />
-</video>
+          ref={videoRef}
+          className="h-full w-full object-cover opacity-90"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={heroPoster}
+          onCanPlay={(event) => void event.currentTarget.play().catch(() => undefined)}
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
       </div>
 
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0.2)_0%,rgba(5,5,5,0.18)_38%,rgba(5,5,5,0.96)_100%)]" />

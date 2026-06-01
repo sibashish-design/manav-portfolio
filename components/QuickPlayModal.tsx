@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { PortfolioProject } from "./portfolioData";
 
 type QuickPlayModalProps = {
@@ -9,6 +9,8 @@ type QuickPlayModalProps = {
 };
 
 export default function QuickPlayModal({ project, onClose }: QuickPlayModalProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     if (!project) return;
 
@@ -24,6 +26,15 @@ export default function QuickPlayModal({ project, onClose }: QuickPlayModalProps
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [onClose, project]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!project || !video) return;
+
+    video.muted = true;
+    video.currentTime = 0;
+    void video.play().catch(() => undefined);
+  }, [project]);
 
   if (!project) return null;
 
@@ -57,7 +68,17 @@ export default function QuickPlayModal({ project, onClose }: QuickPlayModalProps
         </div>
 
         <div className="relative aspect-video bg-black">
-          <video className="h-full w-full object-contain" controls autoPlay playsInline poster={project.poster}>
+          <video
+            ref={videoRef}
+            className="h-full w-full object-contain"
+            controls
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            poster={project.poster}
+            onCanPlay={(event) => void event.currentTarget.play().catch(() => undefined)}
+          >
             <source src={project.video} type="video/mp4" />
           </video>
         </div>

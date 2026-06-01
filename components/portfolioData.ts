@@ -17,8 +17,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: "2026",
     role: "Event Highlight",
     description: "A premium final-day event film built around scale, emotion, and closing-moment impact.",
-    video: "/videos-featured/Day%203%20%20Event%20Highlight.mp4",
-    poster: "/video-thumbnails/Day%203%20%20Event%20Highlight.jpg",
+    video: "/videos-optimized/day-3-event-highlight.mp4.mp4",
+    poster: "/video-thumbnails/day-3-event-highlight.jpg.jpg",
   },
   {
     id: "wedding-film",
