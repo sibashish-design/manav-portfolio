@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const heroVideo = "/videos-optimized/day-3-event-highlight.mp4.mp4";
+const heroVideo = "/videos-featured/Day%203%20%20Event%20Highlight.mp4";
 const heroPoster = "/video-thumbnails/day-3-event-highlight.jpg.jpg";
 
 export default function HeroVideo() {

@@ -64,16 +64,155 @@ body::before {
   font-family: Futura, "Futura PT", "Avenir Next", Avenir, "Trebuchet MS", Arial, sans-serif;
 }
 
-.lens-blade {
+[data-site-shell] {
+  transform-origin: center top;
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.is-preloading [data-site-shell] {
+  opacity: 0;
+  filter: blur(12px);
+  pointer-events: none;
+  transform: scale(0.965);
+}
+
+.camera-lens {
+  position: relative;
+  display: grid;
+  width: min(58vw, 360px);
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 999px;
+}
+
+.camera-lens__ring {
+  position: absolute;
+  border-radius: 999px;
+  border-style: solid;
+}
+
+.camera-lens__ring--outer {
+  inset: 0;
+  border-width: 1px;
+  border-color: rgba(244, 239, 229, 0.42);
+}
+
+.camera-lens__ring--middle {
+  inset: 12%;
+  border-width: 1px;
+  border-color: rgba(215, 195, 154, 0.36);
+}
+
+.camera-lens__ring--inner {
+  inset: 28%;
+  border-width: 1px;
+  border-color: rgba(244, 239, 229, 0.18);
+  background: #050505;
+}
+
+.camera-lens__aperture {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 44%;
-  height: 44%;
-  background: linear-gradient(135deg, rgba(215, 195, 154, 0.3), rgba(255, 255, 255, 0.02));
-  clip-path: polygon(0 0, 100% 14%, 78% 100%, 0 72%);
-  mix-blend-mode: screen;
+  width: 1px;
+  height: 35%;
+  background: rgba(244, 239, 229, 0.22);
   transform-origin: 0 0;
+  transform: rotate(var(--aperture-rotation));
+}
+
+[data-preloader] {
+  animation: preloader-fade 260ms ease 3.05s forwards;
+}
+
+[data-lens] {
+  opacity: 0;
+  animation:
+    lens-enter 760ms cubic-bezier(0.16, 1, 0.3, 1) 180ms forwards,
+    lens-exit 420ms cubic-bezier(0.7, 0, 0.84, 0) 1.55s forwards;
+}
+
+[data-lens-name] {
+  opacity: 0;
+  animation: lens-name-enter 560ms cubic-bezier(0.16, 1, 0.3, 1) 460ms forwards;
+}
+
+[data-aperture-line] {
+  animation: aperture-turn 900ms cubic-bezier(0.76, 0, 0.24, 1) 820ms forwards;
+}
+
+[data-split-line] {
+  animation: split-line-in 220ms ease 1.78s forwards;
+}
+
+[data-lens-left] {
+  animation: split-left 920ms cubic-bezier(0.76, 0, 0.24, 1) 1.95s forwards;
+}
+
+[data-lens-right] {
+  animation: split-right 920ms cubic-bezier(0.76, 0, 0.24, 1) 1.95s forwards;
+}
+
+@keyframes lens-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes lens-name-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aperture-turn {
+  to {
+    transform: rotate(calc(var(--aperture-rotation) + 24deg));
+  }
+}
+
+@keyframes lens-exit {
+  to {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+@keyframes split-line-in {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes split-left {
+  to {
+    transform: translateX(-101%);
+  }
+}
+
+@keyframes split-right {
+  to {
+    transform: translateX(101%);
+  }
+}
+
+@keyframes preloader-fade {
+  to {
+    opacity: 0;
+  }
 }
 
 .tracking-cinema {

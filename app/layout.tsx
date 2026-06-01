@@ -39,9 +39,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Preloader />
-        <SmoothScroll />
-        <Navbar />
-        {children}
+        <div data-site-shell>
+          <SmoothScroll />
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
