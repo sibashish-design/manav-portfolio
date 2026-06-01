@@ -52,8 +52,16 @@ export default function HeroVideo() {
   playsInline
   preload="auto"
   poster="/video-thumbnails/Day%203%20%20Event%20Highlight.jpg"
-  onError={(e) => console.log("VIDEO ERROR", e)}
-  onLoadedData={() => console.log("VIDEO LOADED")}
+  onCanPlay={(e) => {
+    console.log("VIDEO CAN PLAY");
+    e.currentTarget.play().catch(console.error);
+  }}
+  onLoadedData={() => {
+    console.log("VIDEO LOADED");
+  }}
+  onError={(e) => {
+    console.log("VIDEO ERROR", e);
+  }}
 >
   <source src={heroVideo} type="video/mp4" />
 </video>
