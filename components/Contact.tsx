@@ -17,10 +17,10 @@ export default function Contact() {
               Available for event films, brand campaigns, music visuals, motion edits, and social-first cinematic reels.
             </p>
             <a
-              href="mailto:sibashishkurmi@gmail.com"
+              href="mailto:manavdabral1234@gmail.com"
               className="inline-flex w-full items-center justify-center border border-[#d7c39a] bg-[#d7c39a] px-8 py-5 text-xs font-semibold uppercase tracking-cinema text-black transition-colors duration-300 hover:bg-transparent hover:text-[#d7c39a] sm:w-auto"
             >
-              sibashishkurmi@gmail.com
+              manavdabral1234@gmail.com
             </a>
           </div>
         </div>
